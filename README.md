@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Food Ordering Platform Frontend
+
+Production-ready Next.js frontend for a multi-role food marketplace where users can discover home-cooked meals, place orders, and manage activity through role-based dashboards.
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Core Features](#core-features)
+3. [Tech Stack](#tech-stack)
+4. [Project Structure](#project-structure)
+5. [Getting Started](#getting-started)
+6. [Environment Variables](#environment-variables)
+7. [Available Scripts](#available-scripts)
+8. [Role and Access Model](#role-and-access-model)
+9. [API Integration](#api-integration)
+10. [Deployment Notes](#deployment-notes)
+11. [Troubleshooting](#troubleshooting)
+
+## Overview
+
+FoodHub connects customers with local providers who publish meals.
+
+The app supports three user roles:
+
+- USER: browse meals and providers, manage cart, place and track orders
+- PROVIDER: onboard as provider, manage menu, update order status
+- ADMIN: monitor users and manage platform data such as categories
+
+## Core Features
+
+- Landing page with featured meals and providers
+- Meal browsing with search and category filters
+- Meal detail pages with provider info and reviews
+- Provider discovery pages
+- Client-side cart with checkout flow
+- Order placement, listing, details, and cancellation actions
+- Role-aware dashboard navigation and pages
+- Provider onboarding flow
+- Authentication with session-based access control
+- Light and dark mode theming
+
+## Tech Stack
+
+- Framework: Next.js 16 (App Router)
+- Language: TypeScript
+- UI: Tailwind CSS v4, shadcn/ui, Radix UI, Lucide icons
+- Forms and validation: TanStack Form, Zod
+- Auth client: better-auth
+- Notifications: Sonner
+
+## Project Structure
+
+```text
+src/
+	app/
+		page.tsx                    # Home page
+		meals/                      # Meal list and detail pages
+		providers/                  # Provider list and detail pages
+		cart/                       # Cart screen
+		checkout/                   # Checkout flow
+		become-a-provider/          # Provider onboarding
+		dashboard/                  # Role-based dashboard areas
+			admin/
+			provider/
+			orders/
+			profile/
+	components/                   # Shared UI and feature components
+	service/                      # Server-side API call wrappers
+	lib/                          # Auth client and utilities
+	proxy.ts                      # Route protection and role checks
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- pnpm 9+
+- Running backend API for FoodHub
+
+### Install and Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App will run at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a local environment file (for example, .env.local) and set the following variables:
 
-## Learn More
+| Variable | Required | Description |
+| --- | --- | --- |
+| API_URL | Yes | Base URL of the backend API for server-side requests |
+| NEXT_PUBLIC_API_URL | Recommended | Public API base URL for client-accessible flows |
 
-To learn more about Next.js, take a look at the following resources:
+Example:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+API_URL=http://localhost:5000/api
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Available Scripts
 
-## Deploy on Vercel
+```bash
+pnpm dev      # Start development server
+pnpm build    # Create production build
+pnpm start    # Start production server
+pnpm lint     # Run ESLint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Role and Access Model
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Protected routes are enforced with a request proxy matcher.
+
+- Protected: dashboard pages, cart, checkout, become-a-provider
+- PROVIDER-only: provider dashboard sections
+- ADMIN-only: admin dashboard sections
+- USER-only: cart, checkout, provider onboarding
+
+If a user is not authenticated, they are redirected to the login page.
+
+## API Integration
+
+The frontend is designed to work with a separate backend service.
+
+- Most API interactions are handled in src/service
+- Auth calls include credentials and cookies
+- Next config includes auth route rewrite support for backend auth endpoints
+
+## Deployment Notes
+
+- Ensure all required environment variables are set in the deployment platform
+- Confirm the backend API domain allows credentials and cookies for this frontend domain
+- Run a production check before release:
+
+```bash
+pnpm lint
+pnpm build
+```
