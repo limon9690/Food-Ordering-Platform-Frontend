@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FoodHub | Home-Cooked Meals Marketplace",
+  title: "FoodHub | Food Ordering Platform",
   description:
     "Discover home-cooked meals from local providers, place orders, and manage everything from a role-based dashboard.",
 };
