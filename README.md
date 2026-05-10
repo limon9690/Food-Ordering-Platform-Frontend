@@ -2,19 +2,25 @@
 
 Production-ready Next.js frontend for a multi-role food marketplace where users can discover home-cooked meals, place orders, and manage activity through role-based dashboards.
 
+## Project Links
+
+- Live URL: https://foodhub-frontend-puce.vercel.app/
+- Backend GitHub Repository: https://github.com/limon9690/Food-Ordering-Platform-Backend
+
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Core Features](#core-features)
-3. [Tech Stack](#tech-stack)
-4. [Project Structure](#project-structure)
-5. [Getting Started](#getting-started)
-6. [Environment Variables](#environment-variables)
-7. [Available Scripts](#available-scripts)
-8. [Role and Access Model](#role-and-access-model)
-9. [API Integration](#api-integration)
-10. [Deployment Notes](#deployment-notes)
-11. [Troubleshooting](#troubleshooting)
+2. [Project Links](#project-links)
+3. [Core Features](#core-features)
+4. [Tech Stack](#tech-stack)
+5. [Project Structure](#project-structure)
+6. [Getting Started](#getting-started)
+7. [Environment Variables](#environment-variables)
+8. [Available Scripts](#available-scripts)
+9. [Role and Access Model](#role-and-access-model)
+10. [API Integration](#api-integration)
+11. [Deployment Notes](#deployment-notes)
+12. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
